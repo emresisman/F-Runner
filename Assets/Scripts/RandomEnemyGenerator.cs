@@ -11,7 +11,6 @@ namespace emresisman.Assets.Scripts
         public static RandomEnemyGenerator Instance { get => _instance; }
         #endregion
 
-        [SerializeField] private GameObject _enemyPrefab;
         private List<int> _spawnedEnemyPositions = new List<int>();
 
         private void Start()
@@ -53,7 +52,9 @@ namespace emresisman.Assets.Scripts
 
         private void SpawnEnemies(Vector3 spawnPosition)
         {
-            Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
+            GameObject spawnedObject;
+            EnemyPool.Instance.GetNewEnemy(out spawnedObject);
+            spawnedObject.transform.position = spawnPosition;
         }
     }
 }

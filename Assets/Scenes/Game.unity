@@ -226,29 +226,29 @@ Tilemap:
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
-      e00: -1.084227e-19
-      e01: 9.8574645e-23
-      e02: 2.5258282e-29
-      e03: 8.12162
-      e10: 1.024e-42
-      e11: 4.5905e-41
-      e12: 1.027e-42
-      e13: 1.024e-42
-      e20: 1.7e-44
-      e21: 244423.88
-      e22: 244409.5
-      e23: 244409.5
+      e00: 2.5244127e-29
+      e01: 3.8309977e-18
+      e02: -2.5435564e-29
+      e03: -9.727446e-10
+      e10: 9.29e-43
+      e11: 4.5904e-41
+      e12: 9.3e-43
+      e13: 9.28e-43
+      e20: 6e-45
+      e21: 13545640
+      e22: 13544720
+      e23: 13544720
       e30: 0
-      e31: 3.57e-43
-      e32: 3.57e-43
-      e33: 3.57e-43
+      e31: 3.01e-43
+      e32: 3.01e-43
+      e33: 3.01e-43
   m_TileColorArray:
   - m_RefCount: 0
     m_Data: {r: 2.5258282e-29, g: 2.5258282e-29, b: 2.5258282e-29, a: 2.5258282e-29}
   - m_RefCount: 0
     m_Data: {r: 2.5258282e-29, g: 2.5258282e-29, b: 2.5258282e-29, a: 2.5258282e-29}
   - m_RefCount: 0
-    m_Data: {r: 2.5258282e-29, g: 2.5258282e-29, b: 2.5258282e-29, a: 2.5258282e-29}
+    m_Data: {r: -2.5435564e-29, g: -2.5435564e-29, b: -2.5435564e-29, a: -2.5435564e-29}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -350,7 +350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052514377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -10}
+  m_LocalPosition: {x: 15, y: 5, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -3,11 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace emresisman
+namespace emresisman.Assets.Scripts
 {
+    public delegate void WhenPathCreated(int pathLength, int pathStartPosition);
+
     public class RandomTileGenerator : MonoBehaviour
     {
-        public const int SCREEN_SIZE_TILE_COUNT = 30;
+        #region Singleton
+                private static RandomTileGenerator _instance;
+                public static RandomTileGenerator Instance { get => _instance;}
+        #endregion
+
+        public event WhenPathCreated WhenPathCreated;
+
+        public const int SCREEN_SIZE_TILE_COUNT = 50;
         private int _createdTileCount;
 
         private float _playerSpeed;
@@ -16,16 +25,21 @@ namespace emresisman
         public Tilemap _mainTileMap;
         public Tile _tile;
 
-
         private void Start()
         {
+            _playerSpeed = 2.8f;
+            _instance = this;
             _currentHorizontalPosition = new Vector3Int(0, 0, 0);
+            CreateNewScreenTiles();
         }
 
-        void SetTile(Tile _tile)
+        void SetTile(Tile _tile, int _tileLength)
         {
-            _mainTileMap.SetTile(_currentHorizontalPosition, _tile);
-            GoNextPosition();
+            for (int i = 0; i < _tileLength; i++)
+            {
+                _mainTileMap.SetTile(_currentHorizontalPosition, _tile);
+                GoNextPosition();
+            }
         }
 
         private void GoNextPosition()
@@ -46,22 +60,17 @@ namespace emresisman
 
         private int CreatePath()
         {
-            int i = Random.Range(1, ((int)_playerSpeed) * 5);
-            for (int k = 0; k < i; k++)
-            {
-                SetTile(_tile);
-            }
-            return i;
+            int _pathLength = Random.Range(1, ((int)_playerSpeed) * 5 + 1);
+            SetTile(_tile, _pathLength);
+            WhenPathCreated.Invoke(_pathLength, _currentHorizontalPosition.x);
+            return _pathLength;
         }
 
         private int CreateSpace()
         {
-            int i = Random.Range(1, ((int)_playerSpeed));
-            for (int k = 0; k < i; k++)
-            {
-                SetTile(null);
-            }
-            return i;
+            int _spaceLength = Random.Range(1, ((int)_playerSpeed) + 1);
+            SetTile(null, _spaceLength);
+            return _spaceLength;
         }
 
     }

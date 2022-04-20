@@ -27,9 +27,15 @@ namespace emresisman.Assets.Scripts
 
         private void Start()
         {
-            _playerSpeed = 2.8f;
             _instance = this;
+            _playerSpeed = 2.8f;
             _currentHorizontalPosition = new Vector3Int(0, 0, 0);
+            StartCoroutine(WaitOneSecond());
+        }
+
+        IEnumerator WaitOneSecond()
+        {
+            yield return new WaitForSeconds(1);
             CreateNewScreenTiles();
         }
 
@@ -62,7 +68,7 @@ namespace emresisman.Assets.Scripts
         {
             int _pathLength = Random.Range(1, ((int)_playerSpeed) * 5 + 1);
             SetTile(_tile, _pathLength);
-            WhenPathCreated.Invoke(_pathLength, _currentHorizontalPosition.x);
+            WhenPathCreated?.Invoke(_pathLength, _currentHorizontalPosition.x - _pathLength);
             return _pathLength;
         }
 

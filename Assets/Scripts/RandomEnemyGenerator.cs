@@ -16,11 +16,11 @@ namespace emresisman.Assets.Scripts
 
         private void Start()
         {
-            RandomTileGenerator.Instance.WhenPathCreated += NewPathCreated;
             _instance = this;
+            RandomTileGenerator.Instance.WhenPathCreated += NewPathCreated;
         }
 
-        private void NewPathCreated(int pathLength, int pathStartPosition)
+        public void NewPathCreated(int pathLength, int pathStartPosition)
         {
             int _maxEnemyCount = NumberOfEnemiesToSpawn(0, MaxEnemyCountOnOnePath(pathLength));
             for(int i = 0; i < _maxEnemyCount; i++)
@@ -37,10 +37,10 @@ namespace emresisman.Assets.Scripts
 
         private int NumberOfEnemiesToSpawn(int minCount, int maxCount)
         {
-            return Random.Range(minCount, maxCount);
+            return Random.Range(minCount, maxCount + 1);
         }
 
-        private Vector3Int PositionOfEnemiesToSpawn(int pathLength, int pathStartPosition)
+        private Vector3 PositionOfEnemiesToSpawn(int pathLength, int pathStartPosition)
         {
             int randomPosX = Random.Range(pathStartPosition, pathStartPosition + pathLength);
             while (_spawnedEnemyPositions.Contains(randomPosX))
@@ -48,10 +48,10 @@ namespace emresisman.Assets.Scripts
                 randomPosX = Random.Range(pathStartPosition, pathStartPosition + pathLength);
             }
 
-            return new Vector3Int(randomPosX, 1, 0);
+            return new Vector3(randomPosX + 0.5f, 2, 0);
         }
 
-        private void SpawnEnemies(Vector3Int spawnPosition)
+        private void SpawnEnemies(Vector3 spawnPosition)
         {
             Instantiate(_enemyPrefab, spawnPosition, Quaternion.identity);
         }

@@ -9,26 +9,25 @@ namespace emresisman.Assets.Scripts
 
     public class RandomTileGenerator : MonoBehaviour
     {
+        public event WhenPathCreated WhenPathCreated;
+        public const int SCREEN_SIZE_TILE_COUNT = 50;
+
         #region Singleton
                 private static RandomTileGenerator _instance;
                 public static RandomTileGenerator Instance { get => _instance;}
         #endregion
 
-        public event WhenPathCreated WhenPathCreated;
+        public Vector3Int CurrentHorizontalPosition { get => _currentHorizontalPosition; }
+        [SerializeField] private Player _player;
+        [SerializeField] private Tilemap _mainTileMap;
+        [SerializeField] private Tile _tile;        
 
-        public const int SCREEN_SIZE_TILE_COUNT = 50;
         private int _createdTileCount;
-
-        private float _playerSpeed;
         private Vector3Int _currentHorizontalPosition;
         
-        public Tilemap _mainTileMap;
-        public Tile _tile;
-
         private void Start()
         {
             _instance = this;
-            _playerSpeed = 2.8f;
             _currentHorizontalPosition = new Vector3Int(0, 0, 0);
             StartCoroutine(WaitOneSecond());
         }
@@ -52,10 +51,9 @@ namespace emresisman.Assets.Scripts
         {
             _currentHorizontalPosition =
                 new Vector3Int(_currentHorizontalPosition.x + 1, 0, 0);
-                
         }
 
-        private void CreateNewScreenTiles()
+        public void CreateNewScreenTiles()
         {
             _createdTileCount = 0;
             while (_createdTileCount < SCREEN_SIZE_TILE_COUNT)
@@ -66,7 +64,7 @@ namespace emresisman.Assets.Scripts
 
         private int CreatePath()
         {
-            int _pathLength = Random.Range(1, ((int)_playerSpeed) * 5 + 1);
+            int _pathLength = Random.Range(1, ((int)_player.Speed) * 5 + 1);
             SetTile(_tile, _pathLength);
             WhenPathCreated?.Invoke(_pathLength, _currentHorizontalPosition.x - _pathLength);
             return _pathLength;
@@ -74,7 +72,7 @@ namespace emresisman.Assets.Scripts
 
         private int CreateSpace()
         {
-            int _spaceLength = Random.Range(1, ((int)_playerSpeed) + 1);
+            int _spaceLength = Random.Range(1, ((int)_player.Speed) + 1);
             SetTile(null, _spaceLength);
             return _spaceLength;
         }

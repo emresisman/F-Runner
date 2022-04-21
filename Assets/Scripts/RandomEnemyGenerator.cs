@@ -54,6 +54,8 @@ namespace emresisman.Assets.Scripts
         {
             GameObject spawnedObject;
             EnemyPool.Instance.GetNewEnemy(out spawnedObject);
+            spawnedObject.SetActive(true);
+            spawnedObject.transform.parent = null;
             spawnedObject.transform.position = spawnPosition;
         }
     }

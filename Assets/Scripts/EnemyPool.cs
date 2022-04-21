@@ -17,13 +17,13 @@ namespace emresisman.Assets.Scripts
         private void Start()
         {
             _instance = this;
-            FillPool(20);
+            FillPool(50);
         }
 
         public void GetNewEnemy(out GameObject objectWillSpawn)
         {
             objectWillSpawn = RemoveObjectFromPool();
-            UpdateEnemyForPath(objectWillSpawn);
+            //UpdateEnemyForPath(objectWillSpawn);
             _enemyList.RemoveAt(0);
         }
 

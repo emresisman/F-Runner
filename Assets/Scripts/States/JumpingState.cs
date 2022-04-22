@@ -8,18 +8,23 @@ namespace emresisman.Assets.Scripts
     {
         private bool grounded;
         private bool diving;
-        //private int jumpParam = Animator.StringToHash("Jump");
-        //private int landParam = Animator.StringToHash("Land");
 
         public JumpingState(Player player, StateMachine stateMachine) : base(player, stateMachine) { }
 
         public override void Enter()
         {
             base.Enter();
+            player.SetAnimationBool(jumpParam, true);
             //SoundManager.Instance.PlaySound(SoundManager.Instance.jumpSounds);
             grounded = false;
             diving = false;
             Jump();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            player.SetAnimationBool(jumpParam, false);
         }
 
         public override void HandleInput()

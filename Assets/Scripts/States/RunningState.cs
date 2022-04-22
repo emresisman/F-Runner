@@ -13,7 +13,14 @@ namespace emresisman.Assets.Scripts
         public override void Enter()
         {
             base.Enter();
+            player.SetAnimationBool(runParam, true);
             jump = false;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            player.SetAnimationBool(runParam, false);
         }
 
         public override void HandleInput()

@@ -96,10 +96,5 @@ namespace emresisman.Assets.Scripts
         {
             _animator.SetBool(param, value);
         }
-
-        public void TriggerAnimation(int param)
-        {
-            _animator.SetTrigger(param);
-        }
     }
 }

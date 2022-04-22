@@ -13,8 +13,15 @@ namespace emresisman.Assets.Scripts
         public override void Enter()
         {
             base.Enter();
+            player.SetAnimationBool(diveParam, true);
             grounded = false;
             Dive();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            player.SetAnimationBool(diveParam, false);
         }
 
         public override void LogicUpdate()

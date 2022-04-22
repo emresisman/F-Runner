@@ -8,6 +8,10 @@ namespace emresisman.Assets.Scripts
         protected Player player;
         protected StateMachine stateMachine;
 
+        protected int jumpParam = Animator.StringToHash("Jump");
+        protected int runParam = Animator.StringToHash("Run");
+        protected int diveParam = Animator.StringToHash("Dive");
+
         protected State(Player player, StateMachine stateMachine)
         {
             this.player = player;

@@ -474,6 +474,7 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  _animator: {fileID: 1641965868}
 --- !u!212 &1641965865
 SpriteRenderer:
   m_ObjectHideFlags: 0

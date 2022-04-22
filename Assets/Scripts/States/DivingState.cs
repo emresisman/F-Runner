@@ -6,41 +6,35 @@ namespace emresisman.Assets.Scripts
 {
     public class DivingState : State
     {
-        private bool belowCeiling;
-        private bool crouchHeld;
+        private bool grounded;
 
-        public DivingState(Player player, StateMachine stateMachine) : base(player, stateMachine)
-        {
-        }
+        public DivingState(Player player, StateMachine stateMachine) : base(player, stateMachine) { }
 
         public override void Enter()
         {
             base.Enter();
-
-        }
-
-        public override void Exit()
-        {
-            base.Exit();
-
-        }
-
-        public override void HandleInput()
-        {
-            base.HandleInput();
-
+            grounded = false;
+            Dive();
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-
+            if (grounded)
+            {
+                stateMachine.ChangeState(player._running);
+            }
         }
 
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
+            grounded = player.CheckCollisionOverlap(player.transform.position);
+        }
 
+        private void Dive()
+        {
+            player.ApplyImpulse(Vector2.down * player.DiveForce);
         }
     }
 }

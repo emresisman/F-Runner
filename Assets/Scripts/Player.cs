@@ -12,11 +12,14 @@ namespace emresisman.Assets.Scripts
 
         private float _speed;
         private float _deltaSpeed;
-        public float JumpForce = 0.5f;
+        public float JumpForce = 5.5f;
+        public float DiveForce = 10f;
         public float CollisionOverlapRadius = 0.1f;
 
+        [SerializeField] private Vector2 _capsuleSize;
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private LayerMask _groundLayer;
+        [SerializeField] private Animator _animator;
 
         public float Speed { get => _speed; }
         public float DeltaSpeed 
@@ -41,7 +44,7 @@ namespace emresisman.Assets.Scripts
             _diving = new DivingState(this, _movementSM);
 
             _movementSM.Initialize(_running);
-            DeltaSpeed = 0.02f;
+            DeltaSpeed = 0.03f;
             StartCoroutine(IncreaseSpeed());
         }
 
@@ -49,11 +52,6 @@ namespace emresisman.Assets.Scripts
         {
             _movementSM.CurrentState.HandleInput();
             _movementSM.CurrentState.LogicUpdate();
-
-            if (PlayerReachEndOfPath())
-            {
-                RandomTileGenerator.Instance.CreateNewScreenTiles();
-            }
         }
 
         private void FixedUpdate()
@@ -75,7 +73,7 @@ namespace emresisman.Assets.Scripts
             }
         }
 
-        private bool PlayerReachEndOfPath()
+        public bool PlayerReachEndOfPath()
         {
             if(Vector3.Distance(transform.position, RandomTileGenerator.Instance.CurrentHorizontalPosition) < 40f)
             {
@@ -83,6 +81,7 @@ namespace emresisman.Assets.Scripts
             }
             return false;
         }
+
         public void ApplyImpulse(Vector2 force)
         {
             _rigidbody.AddForce(force, ForceMode2D.Impulse);
@@ -90,7 +89,17 @@ namespace emresisman.Assets.Scripts
 
         public bool CheckCollisionOverlap(Vector2 point)
         {
-            return Physics2D.OverlapCircleAll(point, 0.1f, _groundLayer).Length > 0;
+            return Physics2D.OverlapCapsuleAll(point, _capsuleSize, CapsuleDirection2D.Vertical, 0, _groundLayer).Length > 0;
+        }
+
+        public void SetAnimationBool(int param, bool value)
+        {
+            _animator.SetBool(param, value);
+        }
+
+        public void TriggerAnimation(int param)
+        {
+            _animator.SetTrigger(param);
         }
     }
 }

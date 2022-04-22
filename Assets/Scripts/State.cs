@@ -26,7 +26,10 @@ namespace emresisman.Assets.Scripts
 
         public virtual void LogicUpdate()
         {
-
+            if (player.PlayerReachEndOfPath())
+            {
+                RandomTileGenerator.Instance.CreateNewScreenTiles();
+            }
         }
 
         public virtual void PhysicsUpdate()

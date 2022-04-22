@@ -8,9 +8,7 @@ namespace emresisman.Assets.Scripts
     {
         private bool jump;
 
-        public RunningState(Player player, StateMachine stateMachine) : base(player, stateMachine)
-        {
-        }
+        public RunningState(Player player, StateMachine stateMachine) : base(player, stateMachine) { }
 
         public override void Enter()
         {

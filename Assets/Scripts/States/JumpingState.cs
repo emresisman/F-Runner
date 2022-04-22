@@ -11,9 +11,7 @@ namespace emresisman.Assets.Scripts
         //private int jumpParam = Animator.StringToHash("Jump");
         //private int landParam = Animator.StringToHash("Land");
 
-        public JumpingState(Player player, StateMachine stateMachine) : base(player, stateMachine)
-        {
-        }
+        public JumpingState(Player player, StateMachine stateMachine) : base(player, stateMachine) { }
 
         public override void Enter()
         {

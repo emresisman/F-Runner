@@ -13,7 +13,6 @@ namespace emresisman.Assets.Scripts
         public override void Enter()
         {
             base.Enter();
-            player.SetAnimationBool(diveParam, true);
             grounded = false;
             Dive();
         }
@@ -42,6 +41,7 @@ namespace emresisman.Assets.Scripts
         private void Dive()
         {
             player.ApplyImpulse(Vector2.down * player.DiveForce);
+            player.SetAnimationBool(diveParam, true);
         }
     }
 }

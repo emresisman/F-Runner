@@ -14,8 +14,6 @@ namespace emresisman.Assets.Scripts
         public override void Enter()
         {
             base.Enter();
-            player.SetAnimationBool(jumpParam, true);
-            //SoundManager.Instance.PlaySound(SoundManager.Instance.jumpSounds);
             grounded = false;
             diving = false;
             Jump();
@@ -41,8 +39,6 @@ namespace emresisman.Assets.Scripts
             base.LogicUpdate();
             if (grounded)
             {
-                //character.TriggerAnimation(landParam);
-                //SoundManager.Instance.PlaySound(SoundManager.Instance.landing);
                 stateMachine.ChangeState(player._running);
             }
             if (diving)
@@ -61,7 +57,7 @@ namespace emresisman.Assets.Scripts
         {
             player.transform.Translate(Vector2.up * (player.CollisionOverlapRadius + 0.1f));
             player.ApplyImpulse(Vector2.up * player.JumpForce);
-            //player.TriggerAnimation(jumpParam);
+            player.SetAnimationBool(jumpParam, true);
         }
     }
 }

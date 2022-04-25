@@ -41,13 +41,18 @@ namespace emresisman.Assets.Scripts
 
         private Vector3 PositionOfEnemiesToSpawn(int pathLength, int pathStartPosition)
         {
-            int randomPosX = Random.Range(pathStartPosition, pathStartPosition + pathLength);
-            while (_spawnedEnemyPositions.Contains(randomPosX))
+            int randomPosX;
+            do
             {
-                randomPosX = Random.Range(pathStartPosition, pathStartPosition + pathLength);
-            }
+                randomPosX = Random.Range(pathStartPosition, pathStartPosition + (pathLength * 2));
+            } while (!IsOddNumber(randomPosX) || _spawnedEnemyPositions.Contains(randomPosX));
+            _spawnedEnemyPositions.Add(randomPosX);
+            return new Vector3(randomPosX, 2, 0);
+        }
 
-            return new Vector3(randomPosX + 0.5f, 2, 0);
+        private bool IsOddNumber(int number)
+        {
+            return number % 2 == 1 ? true : false;
         }
 
         private void SpawnEnemies(Vector3 spawnPosition)

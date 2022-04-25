@@ -10,7 +10,7 @@ namespace emresisman.Assets.Scripts
     public class RandomTileGenerator : MonoBehaviour
     {
         public event WhenPathCreated WhenPathCreated;
-        public const int SCREEN_SIZE_TILE_COUNT = 50;
+        public const int SCREEN_SIZE_TILE_COUNT = 25;
 
         #region Singleton
                 private static RandomTileGenerator _instance;
@@ -20,7 +20,7 @@ namespace emresisman.Assets.Scripts
         public Vector3Int CurrentHorizontalPosition { get => _currentHorizontalPosition; }
         [SerializeField] private Player _player;
         [SerializeField] private Tilemap _mainTileMap;
-        [SerializeField] private Tile _tile;        
+        [SerializeField] private Tile _tile;
 
         private int _createdTileCount;
         private Vector3Int _currentHorizontalPosition;
@@ -29,12 +29,13 @@ namespace emresisman.Assets.Scripts
         {
             _instance = this;
             _currentHorizontalPosition = new Vector3Int(0, 0, 0);
+            CreateStartingScreenTiles(); 
             StartCoroutine(WaitOneSecond());
         }
 
         IEnumerator WaitOneSecond()
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.1f);
             CreateNewScreenTiles();
         }
 
@@ -53,6 +54,13 @@ namespace emresisman.Assets.Scripts
                 new Vector3Int(_currentHorizontalPosition.x + 1, 0, 0);
         }
 
+        private void CreateStartingScreenTiles()
+        {
+            SetTile(_tile, 5);
+            SetTile(null, 1);
+        }
+
+
         public void CreateNewScreenTiles()
         {
             _createdTileCount = 0;
@@ -66,7 +74,7 @@ namespace emresisman.Assets.Scripts
         {
             int _pathLength = Random.Range(1, ((int)_player.Speed) * 5 + 1);
             SetTile(_tile, _pathLength);
-            WhenPathCreated?.Invoke(_pathLength, _currentHorizontalPosition.x - _pathLength);
+            WhenPathCreated?.Invoke(_pathLength, (_currentHorizontalPosition.x - _pathLength) * 2);
             return _pathLength;
         }
 

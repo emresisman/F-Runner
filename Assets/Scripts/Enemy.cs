@@ -5,7 +5,7 @@ namespace emresisman.Assets.Scripts
 {
     public class Enemy : MonoBehaviour
     {
-        private void Death()
+        public void Death()
         {
             EnemyPool.Instance.AddEnemyToPool(this.gameObject);
         }

@@ -196,7 +196,7 @@ Transform:
   m_GameObject: {fileID: 1001252203}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2092207223}
   m_RootOrder: 0
@@ -426,6 +426,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 649709884138491428, guid: 296ae6e70ec718144bc1aa05232a1944, type: 3}
+      propertyPath: DiveForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 649709884138491428, guid: 296ae6e70ec718144bc1aa05232a1944, type: 3}
+      propertyPath: JumpForce
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 649709884138491434, guid: 296ae6e70ec718144bc1aa05232a1944, type: 3}
       propertyPath: m_Name
       value: Player

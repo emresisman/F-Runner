@@ -35,9 +35,9 @@ namespace emresisman.Assets.Scripts
 
         private void UpdateEmemyForPool(GameObject enemy)
         {
-            enemy.SetActive(false);
             enemy.transform.position = this.transform.position;
             enemy.transform.parent = this.transform;
+            enemy.SetActive(false);
         }
 
         private void UpdateEnemyForPath(GameObject enemy)

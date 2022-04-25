@@ -11,6 +11,7 @@ namespace emresisman.Assets.Scripts
         public JumpingState _jumping;
 
         private float _speed;
+        private float _runningSpeed = 0.7f;
         private float _deltaSpeed;
         public float JumpForce = 5.5f;
         public float DiveForce = 10f;
@@ -62,6 +63,8 @@ namespace emresisman.Assets.Scripts
         private void UpdateSpeed()
         {
             _speed = _deltaSpeed * 50;
+            _runningSpeed = 0.7f + _deltaSpeed * 2;
+            _animator.SetFloat("RunningSpeed", Mathf.Clamp(_runningSpeed, 0.7f, 2f));
         }
 
         IEnumerator IncreaseSpeed()
@@ -75,7 +78,7 @@ namespace emresisman.Assets.Scripts
 
         public bool PlayerReachEndOfPath()
         {
-            if(Vector3.Distance(transform.position, RandomTileGenerator.Instance.CurrentHorizontalPosition) < 40f)
+            if(Vector3.Distance(transform.position, RandomTileGenerator.Instance.CurrentHorizontalPosition) < 20f)
             {
                 return true;
             }
@@ -90,6 +93,31 @@ namespace emresisman.Assets.Scripts
         public bool CheckCollisionOverlap(Vector2 point)
         {
             return Physics2D.OverlapCapsuleAll(point, _capsuleSize, CapsuleDirection2D.Vertical, 0, _groundLayer).Length > 0;
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.tag == "Enemy")
+            {
+                Debug.Log(collision.GetContact(0).normal);
+                if (isEnemyUnderThePlayer(collision.GetContact(0).normal))
+                {
+                    collision.gameObject.GetComponent<Enemy>().Death();
+                    ResetVelocity();
+                    _movementSM.ChangeState(_jumping);
+                }
+            }
+        }
+
+        private void ResetVelocity()
+        {
+            _rigidbody.velocity = Vector3.zero;
+        }
+
+        private bool isEnemyUnderThePlayer(Vector2 point)
+        {
+            if (point.y >= 0.8f) return true;
+            else return false;
         }
 
         public void SetAnimationBool(int param, bool value)

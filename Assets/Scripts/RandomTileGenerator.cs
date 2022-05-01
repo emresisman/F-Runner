@@ -72,7 +72,7 @@ namespace emresisman.Assets.Scripts
 
         private int CreatePath()
         {
-            int _pathLength = Random.Range(1, ((int)_player.Speed) * 5 + 1);
+            int _pathLength = Random.Range(1, ((int)_player.Speed) * 2 + 1);
             SetTile(_tile, _pathLength);
             WhenPathCreated?.Invoke(_pathLength, (_currentHorizontalPosition.x - _pathLength) * 2);
             return _pathLength;

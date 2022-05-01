@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using emresisman.Assets.Scripts.States;
 
 namespace emresisman.Assets.Scripts
 {
@@ -13,6 +14,9 @@ namespace emresisman.Assets.Scripts
         private float _speed;
         private float _runningSpeed = 0.7f;
         private float _deltaSpeed;
+        private float _normalGravity = 10f;
+        private float _fallGravity = 20f;
+        private Vector2 _playerVelocity;
         public float JumpForce = 5.5f;
         public float DiveForce = 10f;
         public float CollisionOverlapRadius = 0.1f;
@@ -21,8 +25,23 @@ namespace emresisman.Assets.Scripts
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private Animator _animator;
-
+        
         public float Speed { get => _speed; }
+        
+        public Vector2 PlayerVelocity 
+        {
+            get 
+            { 
+                return _playerVelocity;
+            }
+            set
+            {
+                _playerVelocity = value;
+                UpdateVelocity();
+            }
+        }
+
+        
         public float DeltaSpeed 
         {
             get
@@ -67,6 +86,19 @@ namespace emresisman.Assets.Scripts
             _animator.SetFloat("RunningSpeed", Mathf.Clamp(_runningSpeed, 0.7f, 2f));
         }
 
+        private void UpdateVelocity()
+        {
+            _rigidbody.velocity = _playerVelocity;
+            if (_rigidbody.velocity.y >= 0)
+            {
+                SwitchJumpGravity();
+            }
+            else
+            {
+                SwitchFallGravity();
+            }
+        }
+
         IEnumerator IncreaseSpeed()
         {
             while (true)
@@ -76,30 +108,34 @@ namespace emresisman.Assets.Scripts
             }
         }
 
+        public bool IsGrounded()
+        {
+            return Physics2D.OverlapCapsuleAll(transform.position, _capsuleSize, CapsuleDirection2D.Vertical, 0, _groundLayer).Length > 0;
+        }
+
         public bool PlayerReachEndOfPath()
         {
-            if(Vector3.Distance(transform.position, RandomTileGenerator.Instance.CurrentHorizontalPosition) < 20f)
+            if(Vector3.Distance(transform.position, RandomTileGenerator.Instance.CurrentHorizontalPosition * 2) < 40f)
             {
                 return true;
             }
             return false;
         }
 
-        public void ApplyImpulse(Vector2 force)
+        public void ApplyDiveForce(Vector2 force)
         {
             _rigidbody.AddForce(force, ForceMode2D.Impulse);
         }
 
-        public bool CheckCollisionOverlap(Vector2 point)
+        public void ApplyImpulse()
         {
-            return Physics2D.OverlapCapsuleAll(point, _capsuleSize, CapsuleDirection2D.Vertical, 0, _groundLayer).Length > 0;
+            PlayerVelocity = Vector2.up * JumpForce;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.tag == "Enemy")
             {
-                Debug.Log(collision.GetContact(0).normal);
                 if (isEnemyUnderThePlayer(collision.GetContact(0).normal))
                 {
                     collision.gameObject.GetComponent<Enemy>().Death();
@@ -123,6 +159,16 @@ namespace emresisman.Assets.Scripts
         public void SetAnimationBool(int param, bool value)
         {
             _animator.SetBool(param, value);
+        }
+
+        public void SwitchJumpGravity()
+        {
+            _rigidbody.gravityScale = _normalGravity;
+        }
+
+        public void SwitchFallGravity()
+        {
+            _rigidbody.gravityScale = _fallGravity;
         }
     }
 }

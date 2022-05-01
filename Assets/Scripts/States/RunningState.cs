@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace emresisman.Assets.Scripts
+namespace emresisman.Assets.Scripts.States
 {
     public class RunningState : State
     {
@@ -26,7 +26,7 @@ namespace emresisman.Assets.Scripts
         public override void HandleInput()
         {
             base.HandleInput();
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && player.IsGrounded())
             {
                 jump = true;
             }

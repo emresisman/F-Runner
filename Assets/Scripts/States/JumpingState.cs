@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace emresisman.Assets.Scripts
+namespace emresisman.Assets.Scripts.States
 {
     public class JumpingState : State
     {
@@ -50,13 +50,14 @@ namespace emresisman.Assets.Scripts
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
-            grounded = player.CheckCollisionOverlap(player.transform.position);
+            player.PlayerVelocity += Vector2.up * Physics2D.gravity.y * Time.fixedDeltaTime;
+            grounded = player.IsGrounded();
         }
 
         private void Jump()
         {
             player.transform.Translate(Vector2.up * (player.CollisionOverlapRadius + 0.1f));
-            player.ApplyImpulse(Vector2.up * player.JumpForce);
+            player.ApplyImpulse();
             player.SetAnimationBool(jumpParam, true);
         }
     }

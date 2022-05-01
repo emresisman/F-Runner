@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace emresisman.Assets.Scripts
+namespace emresisman.Assets.Scripts.States
 {
     public abstract class State
     {

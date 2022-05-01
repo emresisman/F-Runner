@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace emresisman.Assets.Scripts
+namespace emresisman.Assets.Scripts.States
 {
     public class DivingState : State
     {
@@ -35,12 +35,12 @@ namespace emresisman.Assets.Scripts
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
-            grounded = player.CheckCollisionOverlap(player.transform.position);
+            grounded = player.IsGrounded();
         }
 
         private void Dive()
         {
-            player.ApplyImpulse(Vector2.down * player.DiveForce);
+            player.ApplyDiveForce(Vector2.down * player.DiveForce);
             player.SetAnimationBool(diveParam, true);
         }
     }

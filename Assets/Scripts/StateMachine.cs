@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace emresisman.Assets.Scripts.States
+namespace FRunner.States
 {
     public class StateMachine
     {

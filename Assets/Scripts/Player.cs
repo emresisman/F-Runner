@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
-using emresisman.Assets.Scripts.States;
+using FRunner.States;
 
-namespace emresisman.Assets.Scripts
+namespace FRunner
 {
     public class Player : MonoBehaviour
     {
@@ -14,8 +14,8 @@ namespace emresisman.Assets.Scripts
         private float _speed;
         private float _runningSpeed = 0.7f;
         private float _deltaSpeed;
-        private float _normalGravity = 10f;
-        private float _fallGravity = 20f;
+        private float _normalGravity = 2f;
+        private float _fallGravity = 4f;
         private Vector2 _playerVelocity;
         public float JumpForce = 5.5f;
         public float DiveForce = 10f;
@@ -40,7 +40,6 @@ namespace emresisman.Assets.Scripts
                 UpdateVelocity();
             }
         }
-
         
         public float DeltaSpeed 
         {
@@ -134,7 +133,8 @@ namespace emresisman.Assets.Scripts
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.tag == "Enemy")
+            //if gameobject layer is InteractableEnemy
+            if (collision.gameObject.layer == 6)
             {
                 if (isEnemyUnderThePlayer(collision.GetContact(0).normal))
                 {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace emresisman.Assets.Scripts
+namespace FRunner
 {
     public class PlayerCameraController : MonoBehaviour
     {
@@ -11,7 +11,7 @@ namespace emresisman.Assets.Scripts
 
         private void Update()
         {
-            _playerCamera.transform.position = new Vector3(_player.transform.position.x + 15f, 5f, -20f);
+            _playerCamera.transform.position = new Vector3(_player.transform.position.x + 10f, 5f, -15f);
         }
     }
 }

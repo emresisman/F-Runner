@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace emresisman.Assets.Scripts
+namespace FRunner
 {
     public class EnemyPool : MonoBehaviour
     {

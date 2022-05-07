@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace emresisman.Assets.Scripts.States
+namespace FRunner.States
 {
     public abstract class State
     {
@@ -38,7 +38,7 @@ namespace emresisman.Assets.Scripts.States
 
         public virtual void PhysicsUpdate()
         {
-            player.transform.position = new Vector3(player.transform.position.x + player.DeltaSpeed, player.transform.position.y, 0);
+            player.transform.position = new Vector2(player.transform.position.x + player.DeltaSpeed, player.transform.position.y);
         }
 
         public virtual void Exit()

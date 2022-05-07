@@ -1,16 +1,24 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace emresisman.Assets.Scripts
+namespace FRunner
 {
     public class Enemy : MonoBehaviour
     {
+        [SerializeField] private Animator _animator;
+
         public void Death()
+        {
+            _animator.SetBool("Death", true);
+            gameObject.layer = 2;
+        }
+
+        private void OnBecameInvisible()
         {
             EnemyPool.Instance.AddEnemyToPool(this.gameObject);
         }
 
-        private void OnBecameInvisible()
+        public void DeathEvent()
         {
             EnemyPool.Instance.AddEnemyToPool(this.gameObject);
         }

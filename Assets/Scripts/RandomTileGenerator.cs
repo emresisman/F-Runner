@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace emresisman.Assets.Scripts
+namespace FRunner
 {
     public delegate void WhenPathCreated(int pathLength, int pathStartPosition);
 

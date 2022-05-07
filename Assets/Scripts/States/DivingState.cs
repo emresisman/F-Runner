@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace emresisman.Assets.Scripts.States
+namespace FRunner.States
 {
     public class DivingState : State
     {

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8594338812928982092}
   - component: {fileID: 7852380799156771407}
   - component: {fileID: -6022362705079165984}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00ee4f847229bfd46a018fc3152085f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: -6022362705079165984}
 --- !u!58 &8594338812928982092
 CircleCollider2D:
   m_ObjectHideFlags: 0

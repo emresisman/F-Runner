@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace emresisman.Assets.Scripts.States
+namespace FRunner.States
 {
     public class JumpingState : State
     {
@@ -50,7 +50,6 @@ namespace emresisman.Assets.Scripts.States
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
-            player.PlayerVelocity += Vector2.up * Physics2D.gravity.y * Time.fixedDeltaTime;
             grounded = player.IsGrounded();
         }
 

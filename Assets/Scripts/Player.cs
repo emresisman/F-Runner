@@ -13,6 +13,7 @@ namespace FRunner
         public JumpingState _jumping;
         public DeathState _death;
 
+        private bool _isDead = false;
         private float _speed;
         private float _runningSpeed = 0.7f;
         private float _deltaSpeed;
@@ -137,7 +138,7 @@ namespace FRunner
         private void OnCollisionEnter2D(Collision2D collision)
         {
             //if gameobject layer is InteractableEnemy
-            if (collision.gameObject.layer == 6)
+            if (collision.gameObject.layer == 6 && !_isDead)
             {
                 if (isEnemyUnderThePlayer(collision.GetContact(0).normal))
                 {
@@ -180,6 +181,7 @@ namespace FRunner
 
         public void Die()
         {
+            _isDead = true;
             _movementSM.ChangeState(_death);
         }
     }

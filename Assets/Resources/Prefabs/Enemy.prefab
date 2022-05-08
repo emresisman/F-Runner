@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: -6022362705079165984}
+  _enemyCollider: {fileID: 1760436737112574398}
 --- !u!95 &-6022362705079165984
 Animator:
   serializedVersion: 3

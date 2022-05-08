@@ -20,7 +20,7 @@ namespace FRunner
         public Vector3Int CurrentHorizontalPosition { get => _currentHorizontalPosition; }
         [SerializeField] private Player _player;
         [SerializeField] private Tilemap _mainTileMap;
-        [SerializeField] private Tile _tile;
+        [SerializeField] private Tile _rightTile, _middleTile, _leftTile, _oneTile;
 
         private int _createdTileCount;
         private Vector3Int _currentHorizontalPosition;
@@ -33,18 +33,41 @@ namespace FRunner
             StartCoroutine(WaitOneSecond());
         }
 
-        IEnumerator WaitOneSecond()
+        private IEnumerator WaitOneSecond()
         {
             yield return new WaitForSeconds(0.1f);
             CreateNewScreenTiles();
         }
 
-        void SetTile(Tile _tile, int _tileLength)
+        private void SetTile(int _tileLength)
         {
             for (int i = 0; i < _tileLength; i++)
             {
-                _mainTileMap.SetTile(_currentHorizontalPosition, _tile);
+                _mainTileMap.SetTile(_currentHorizontalPosition, GetPlacedTile(i, _tileLength));
                 GoNextPosition();
+            }
+        }
+
+        private void SetSpace(int _spaceLength)
+        {
+            for (int i = 0; i < _spaceLength; i++)
+            {
+                _mainTileMap.SetTile(_currentHorizontalPosition, null);
+                GoNextPosition();
+            }
+        }
+
+        private Tile GetPlacedTile(int i, int _tileLength)
+        {
+            if (_tileLength == 1)
+            {
+                return _oneTile;
+            }
+            else
+            {
+                if (i == 0) return _leftTile;
+                else if (i == _tileLength - 1) return _rightTile;
+                else return _middleTile;
             }
         }
 
@@ -56,8 +79,8 @@ namespace FRunner
 
         private void CreateStartingScreenTiles()
         {
-            SetTile(_tile, 5);
-            SetTile(null, 1);
+            SetTile(5);
+            SetSpace(1);
         }
 
 
@@ -73,7 +96,7 @@ namespace FRunner
         private int CreatePath()
         {
             int _pathLength = Random.Range(1, ((int)_player.Speed) * 2 + 1);
-            SetTile(_tile, _pathLength);
+            SetTile(_pathLength);
             WhenPathCreated?.Invoke(_pathLength, (_currentHorizontalPosition.x - _pathLength) * 2);
             return _pathLength;
         }
@@ -81,9 +104,8 @@ namespace FRunner
         private int CreateSpace()
         {
             int _spaceLength = Random.Range(1, ((int)_player.Speed) + 1);
-            SetTile(null, _spaceLength);
+            SetSpace(_spaceLength);
             return _spaceLength;
         }
-
     }
 }

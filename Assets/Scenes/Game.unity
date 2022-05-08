@@ -299,7 +299,7 @@ Transform:
   m_GameObject: {fileID: 1001252203}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 2092207223}
   m_RootOrder: 0
@@ -509,7 +509,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1641965864}
   _mainTileMap: {fileID: 1001252206}
-  _tile: {fileID: 11400000, guid: e3f80ac8d19e332479a5d03ce953bc9c, type: 2}
+  _rightTile: {fileID: 11400000, guid: 9ef3eff934c5d09409320d8cc2474f2f, type: 2}
+  _middleTile: {fileID: 11400000, guid: 8c0583c4997af29459616893182f1c61, type: 2}
+  _leftTile: {fileID: 11400000, guid: 62f433aa5b534d948847e6cc1409e14b, type: 2}
+  _oneTile: {fileID: 11400000, guid: 23de78d8473898c48ae935fc211f70a3, type: 2}
 --- !u!114 &2092207225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,11 +542,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 649709884138491435, guid: 296ae6e70ec718144bc1aa05232a1944, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 649709884138491435, guid: 296ae6e70ec718144bc1aa05232a1944, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 649709884138491435, guid: 296ae6e70ec718144bc1aa05232a1944, type: 3}
       propertyPath: m_LocalPosition.z

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using FRunner.States;
+using FRunner.Enemies;
 
 namespace FRunner
 {
@@ -10,6 +11,7 @@ namespace FRunner
         public RunningState _running;
         public DivingState _diving;
         public JumpingState _jumping;
+        public DeathState _death;
 
         private float _speed;
         private float _runningSpeed = 0.7f;
@@ -61,6 +63,7 @@ namespace FRunner
             _running = new RunningState(this, _movementSM);
             _jumping = new JumpingState(this, _movementSM);
             _diving = new DivingState(this, _movementSM);
+            _death =  new DeathState(this, _movementSM);
 
             _movementSM.Initialize(_running);
             DeltaSpeed = 0.03f;
@@ -109,7 +112,7 @@ namespace FRunner
 
         public bool IsGrounded()
         {
-            return Physics2D.OverlapCapsuleAll(transform.position, _capsuleSize, CapsuleDirection2D.Vertical, 0, _groundLayer).Length > 0;
+            return Physics2D.OverlapBoxAll(transform.position, _capsuleSize, 0, _groundLayer).Length > 0;
         }
 
         public bool PlayerReachEndOfPath()
@@ -142,6 +145,10 @@ namespace FRunner
                     ResetVelocity();
                     _movementSM.ChangeState(_jumping);
                 }
+                else
+                {
+                    _animator.SetTrigger("Death");
+                }
             }
         }
 
@@ -152,7 +159,7 @@ namespace FRunner
 
         private bool isEnemyUnderThePlayer(Vector2 point)
         {
-            if (point.y >= 0.8f) return true;
+            if (point.y >= 0.95f) return true;
             else return false;
         }
 
@@ -169,6 +176,11 @@ namespace FRunner
         public void SwitchFallGravity()
         {
             _rigidbody.gravityScale = _fallGravity;
+        }
+
+        public void Die()
+        {
+            _movementSM.ChangeState(_death);
         }
     }
 }

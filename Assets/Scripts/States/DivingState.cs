@@ -12,14 +12,12 @@ namespace FRunner.States
 
         public override void Enter()
         {
-            base.Enter();
             grounded = false;
             Dive();
         }
 
         public override void Exit()
         {
-            base.Exit();
             player.SetAnimationBool(diveParam, false);
         }
 

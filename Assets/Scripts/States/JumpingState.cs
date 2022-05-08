@@ -13,7 +13,6 @@ namespace FRunner.States
 
         public override void Enter()
         {
-            base.Enter();
             grounded = false;
             diving = false;
             Jump();
@@ -21,13 +20,11 @@ namespace FRunner.States
 
         public override void Exit()
         {
-            base.Exit();
             player.SetAnimationBool(jumpParam, false);
         }
 
         public override void HandleInput()
         {
-            base.HandleInput();
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 diving = true;

@@ -461,6 +461,7 @@ GameObject:
   - component: {fileID: 2092207222}
   - component: {fileID: 2092207224}
   - component: {fileID: 2092207225}
+  - component: {fileID: 2092207226}
   m_Layer: 3
   m_Name: Grid
   m_TagString: Ground
@@ -525,6 +526,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e497fae7697b054c88ddb4f0ec8eca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2092207226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092207221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 530006bcdbab6d94b83b40efe7f408f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scoreSO: {fileID: 11400000, guid: 12d25cd4ecc55244db504cb5c91baf6b, type: 2}
 --- !u!1001 &649709885746636556
 PrefabInstance:
   m_ObjectHideFlags: 0

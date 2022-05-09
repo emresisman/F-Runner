@@ -143,6 +143,7 @@ namespace FRunner
                 if (isEnemyUnderThePlayer(collision.GetContact(0).normal))
                 {
                     collision.gameObject.GetComponent<Enemy>().Death();
+                    Score.Instance.UpdateScore(_speed);
                     ResetVelocity();
                     _movementSM.ChangeState(_jumping);
                 }

@@ -26,7 +26,7 @@ namespace FRunner.States
             base.LogicUpdate();
             if (grounded)
             {
-                stateMachine.ChangeState(player._running);
+                stateMachine.ChangeState(player.Running);
             }
         }
 

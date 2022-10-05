@@ -34,7 +34,7 @@ namespace FRunner.States
             base.LogicUpdate();
             if (jump)
             {
-                stateMachine.ChangeState(player._jumping);
+                stateMachine.ChangeState(player.Jumping);
             }
         }
 

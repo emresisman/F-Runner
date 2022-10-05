@@ -39,34 +39,34 @@ namespace FRunner
             CreateNewScreenTiles();
         }
 
-        private void SetTile(int _tileLength)
+        private void SetTile(int tileLength)
         {
-            for (int i = 0; i < _tileLength; i++)
+            for (int i = 0; i < tileLength; i++)
             {
-                _mainTileMap.SetTile(_currentHorizontalPosition, GetPlacedTile(i, _tileLength));
+                _mainTileMap.SetTile(_currentHorizontalPosition, GetPlacedTile(i, tileLength));
                 GoNextPosition();
             }
         }
 
-        private void SetSpace(int _spaceLength)
+        private void SetSpace(int spaceLength)
         {
-            for (int i = 0; i < _spaceLength; i++)
+            for (int i = 0; i < spaceLength; i++)
             {
                 _mainTileMap.SetTile(_currentHorizontalPosition, null);
                 GoNextPosition();
             }
         }
 
-        private Tile GetPlacedTile(int i, int _tileLength)
+        private Tile GetPlacedTile(int i, int tileLength)
         {
-            if (_tileLength == 1)
+            if (tileLength == 1)
             {
                 return _oneTile;
             }
             else
             {
                 if (i == 0) return _leftTile;
-                else if (i == _tileLength - 1) return _rightTile;
+                else if (i == tileLength - 1) return _rightTile;
                 else return _middleTile;
             }
         }

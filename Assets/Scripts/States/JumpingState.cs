@@ -36,11 +36,11 @@ namespace FRunner.States
             base.LogicUpdate();
             if (grounded)
             {
-                stateMachine.ChangeState(player._running);
+                stateMachine.ChangeState(player.Running);
             }
             if (diving)
             {
-                stateMachine.ChangeState(player._diving);
+                stateMachine.ChangeState(player.Diving);
             }
         }
 
@@ -52,7 +52,7 @@ namespace FRunner.States
 
         private void Jump()
         {
-            player.transform.Translate(Vector2.up * (player.CollisionOverlapRadius + 0.1f));
+            player.transform.Translate(Vector2.up * (player.CollisionOverlapRadius));
             player.ApplyImpulse();
             player.SetAnimationBool(jumpParam, true);
         }

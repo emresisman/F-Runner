@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FRunner.UI;
 
 namespace FRunner
 {
@@ -20,13 +21,15 @@ namespace FRunner
             _instance = this;
             _score = 0;
             GetHighScore();
+            UIManager.Instance.UpdateHighScoreText(_highScore);
+            UIManager.Instance.UpdateScoreText(_score);
         }
 
-        public void UpdateScore(float _speed)
+        public void UpdateScore(float speed)
         {
-            _score += (int)(_speed * 5f) - (int)((_speed * 10f) % 10);
+            _score += (int)(speed * 5f) - (int)((speed * 5f) % 10);
             if (_score > _highScore) UpdateHighScore();
-            //UIManager.Instance.UpdateScoreText(_score);
+            UIManager.Instance.UpdateScoreText(_score);
         }
 
         private void GetHighScore()
@@ -42,6 +45,7 @@ namespace FRunner
         private void UpdateHighScore()
         {
             _highScore = _score;
+            UIManager.Instance.UpdateHighScoreText(_highScore);
             SetHighScore();
         }
     }

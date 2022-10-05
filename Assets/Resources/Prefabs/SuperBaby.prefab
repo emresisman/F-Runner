@@ -49,14 +49,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 15
   DiveForce: 30
-  CollisionOverlapRadius: 0.1
+  CollisionOverlapRadius: 0.5
   _capsuleSize: {x: 1.2, y: 4}
   _rigidbody: {fileID: 649709884138491431}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
   _animator: {fileID: 649709884138491424}
-  _playerCollider: {fileID: 5883911205643343985}
 --- !u!212 &649709884138491429
 SpriteRenderer:
   m_ObjectHideFlags: 0

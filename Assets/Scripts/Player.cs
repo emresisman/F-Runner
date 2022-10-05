@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Profiling;
 using FRunner.States;
 using FRunner.Enemies;
 
@@ -7,11 +8,11 @@ namespace FRunner
 {
     public class Player : MonoBehaviour
     {
-        public StateMachine _movementSM;
-        public RunningState _running;
-        public DivingState _diving;
-        public JumpingState _jumping;
-        public DeathState _death;
+        public StateMachine MovementSM;
+        public RunningState Running;
+        public DivingState Diving;
+        public JumpingState Jumping;
+        public DeathState Death;
 
         private bool _isDead = false;
         private float _speed;
@@ -59,27 +60,29 @@ namespace FRunner
 
         private void Start()
         {
-            _movementSM = new StateMachine();
+            MovementSM = new StateMachine();
 
-            _running = new RunningState(this, _movementSM);
-            _jumping = new JumpingState(this, _movementSM);
-            _diving = new DivingState(this, _movementSM);
-            _death =  new DeathState(this, _movementSM);
+            Running = new RunningState(this, MovementSM);
+            Jumping = new JumpingState(this, MovementSM);
+            Diving = new DivingState(this, MovementSM);
+            Death =  new DeathState(this, MovementSM);
 
-            _movementSM.Initialize(_running);
+            MovementSM.Initialize(Running);
             DeltaSpeed = 0.03f;
             StartCoroutine(IncreaseSpeed());
         }
 
         private void Update()
         {
-            _movementSM.CurrentState.HandleInput();
-            _movementSM.CurrentState.LogicUpdate();
+            Profiler.BeginSample("PlayerUpdate");
+            MovementSM.CurrentState.HandleInput();
+            MovementSM.CurrentState.LogicUpdate();
+            Profiler.EndSample();
         }
 
         private void FixedUpdate()
         {
-            _movementSM.CurrentState.PhysicsUpdate();
+            MovementSM.CurrentState.PhysicsUpdate();
         }
 
         private void UpdateSpeed()
@@ -145,7 +148,7 @@ namespace FRunner
                     collision.gameObject.GetComponent<Enemy>().Death();
                     Score.Instance.UpdateScore(_speed);
                     ResetVelocity();
-                    _movementSM.ChangeState(_jumping);
+                    MovementSM.ChangeState(Jumping);
                 }
                 else
                 {
@@ -183,7 +186,7 @@ namespace FRunner
         public void Die()
         {
             _isDead = true;
-            _movementSM.ChangeState(_death);
+            MovementSM.ChangeState(Death);
         }
     }
 }
